@@ -6,12 +6,13 @@ import output, sys
  
 
 data = pd.read_csv('pink_morsels.csv')
+
 data['sales'] = data['quantity'] * data['price']
+data = data.sort_values(by="date")
 data['date'] = pd.to_datetime(data['date'])
 app = Dash(__name__)
-
 # Create a bar chart using Plotly Express
-fig = line(data, x='date', y='sales', color='region',
+fig = px.line(data,  x='sales', y='date',
              title='Sales of Pink Morsels by Date and Region')
 
 # Define the layout of the app
